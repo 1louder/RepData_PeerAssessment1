@@ -4,7 +4,7 @@
 ## Loading and preprocessing the data
 The data for this report can be found at https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip.  
 
-After downloading the data set, it is read into R to analyze it.
+After downloading the data set into a csv file named, "activity.csv", it is read into R to analyze the numbers.
 
 
 ```r
@@ -24,7 +24,7 @@ daily <- c()
 for (i in 1:length(days)) {
     daily <- append(daily, sum(subset(clean, clean$date == days[i])$steps))
 }
-hist(daily)
+hist(daily, main = "Steps Taken Each Day", xlab = "Steps")
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
@@ -68,7 +68,8 @@ for (i in 1:length(unique(clean$interval))) {
         mx <- unique(clean$interval)[i]
     }
 }
-plot(unique(clean$interval), val, type = "l", xlab = "Interval", ylab = "Average Steps")
+plot(unique(clean$interval), val, type = "l", xlab = "Interval", ylab = "Average Steps", 
+    main = "Average Steps by Interval")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
@@ -93,11 +94,9 @@ max(val)
 ## [1] 206.2
 ```
 
-```r
 
 ## Imputing missing values
 
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```

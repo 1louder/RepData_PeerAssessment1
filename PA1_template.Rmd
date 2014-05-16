@@ -4,7 +4,7 @@
 ## Loading and preprocessing the data
 The data for this report can be found at https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip.  
 
-After downloading the data set, it is read into R to analyze it.
+After downloading the data set into a csv file named, "activity.csv", it is read into R to analyze the numbers.
 
 ``` {r}
 dat <- read.csv("activity.csv")
@@ -21,7 +21,7 @@ daily <- c()
 for (i in 1:length(days)) {
         daily <- append(daily,sum(subset(clean, clean$date == days[i])$steps))
 }
-hist(daily)
+hist(daily, main="Steps Taken Each Day", xlab="Steps")
 ```
 
 The **mean** and **median** total number of steps taken per day can be calculated by looking at the daily totals tallied in the *daily* variable above.  Again, entries of "NA" are ignored.
@@ -48,7 +48,7 @@ for (i in 1:length(unique(clean$interval))) {
                 mx <- unique(clean$interval)[i]
         }
 }
-plot(unique(clean$interval), val, type="l", xlab="Interval", ylab="Average Steps")
+plot(unique(clean$interval), val, type="l", xlab="Interval", ylab="Average Steps", main="Average Steps by Interval")
 ```
 
 The interval with the highest average number of steps is displayed below, as well as its value:
