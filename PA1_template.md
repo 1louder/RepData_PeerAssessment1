@@ -177,49 +177,26 @@ par(mfrow = c(2, 1))
 wday <- subset(completeWeekType, completeWeekType$dayType == "weekday")
 wend <- subset(completeWeekType, completeWeekType$dayType == "weekend")
 wdayInt <- split(wday, wday$interval)
-v <- c()
+u <- c()
 
-for (i in 1:length(unique(wdayInt$interval))) {
-    v <- append(v, sum(wdayInt[[i]]["steps"])/(length(allDays)))
+for (i in 1:length(unique(wday$interval))) {
+    u <- append(u, sum(wdayInt[[i]]["steps"])/(length(allDays)))
 }
-```
 
-```
-## Error: attempt to select less than one element
-```
-
-```r
-
-plot(unique(wdayInt$interval), v, type = "l", xlab = "Interval", ylab = "Average Steps", 
-    main = "Average Steps by Interval")
-```
-
-```
-## Error: 'x' and 'y' lengths differ
-```
-
-```r
+plot(unique(wday$interval), u, type = "l", xlab = "Interval", ylab = "Average Steps", 
+    main = "Weekday Average Steps by Interval")
 
 wendInt <- split(wend, wend$interval)
 v <- c()
 
-for (i in 1:length(unique(wendInt$interval))) {
+for (i in 1:length(unique(wend$interval))) {
     v <- append(v, sum(wendInt[[i]]["steps"])/(length(allDays)))
 }
+
+plot(unique(wend$interval), v, type = "l", xlab = "Interval", ylab = "Average Steps", 
+    main = "Weekend Average Steps by Interval")
 ```
 
-```
-## Error: attempt to select less than one element
-```
-
-```r
-
-plot(unique(wendInt$interval), v, type = "l", xlab = "Interval", ylab = "Average Steps", 
-    main = "Average Steps by Interval")
-```
-
-```
-## Error: 'x' and 'y' lengths differ
-```
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
 
 
