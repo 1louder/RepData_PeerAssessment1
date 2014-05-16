@@ -56,6 +56,7 @@ The interval with the highest average number of steps is displayed below, as wel
 ``` {r}
 mx
 max(val)
+```
 
 ## Imputing missing values
 
