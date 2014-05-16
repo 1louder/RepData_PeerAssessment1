@@ -98,3 +98,39 @@ stepsCompleteMedian
 The **mean** and **median** are virtually the same as they were for the data set that omitted "NA" values.  This is because the "NA" values were replaced by the *clean* data set's average value, which of course would not alter the overall average.  The one noticeable change occurs in the histogram, where the most frequent range of daily steps taken increased in frequency.  This is due to the days with "NA" values being assigned the mean, pushing that range higher.  
 
 ## Are there differences in activity patterns between weekdays and weekends?
+``` {r}
+dayType <- c()
+for (i in 1:nrow(complete)) {
+        if (weekdays(as.Date(complete[i,"date"])) =="Saturday" | weekdays(as.Date(complete[i,"date"])) == "Sunday") {
+                dayType <- append(dayType, "weekend")
+        }
+        else {
+                dayType <- append(dayType, "weekday")
+        }
+}
+
+completeWeekType <- cbind(complete,dayType)
+
+par(mfrow=c(2,1))
+wday <- subset(completeWeekType, completeWeekType$dayType == "weekday")
+wend <- subset(completeWeekType, completeWeekType$dayType == "weekend")
+wdayInt <- split(wday, wday$interval)
+v <- c()
+
+for (i in 1:length(unique(wdayInt$interval))) {
+        v <- append(v,sum(wdayInt[[i]]["steps"])/(length(allDays)))
+}
+
+plot(unique(wdayInt$interval), v, type="l", xlab="Interval", ylab="Average Steps", main="Average Steps by Interval")
+
+wendInt <- split(wend, wend$interval)
+v <- c()
+
+for (i in 1:length(unique(wendInt$interval))) {
+        v <- append(v,sum(wendInt[[i]]["steps"])/(length(allDays)))
+}
+
+plot(unique(wendInt$interval), v, type="l", xlab="Interval", ylab="Average Steps", main="Average Steps by Interval")
+
+```
+

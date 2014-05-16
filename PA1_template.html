@@ -311,6 +311,60 @@ stepsCompleteMean
 
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 
+<pre><code class="r">dayType &lt;- c()
+for (i in 1:nrow(complete)) {
+    if (weekdays(as.Date(complete[i, &quot;date&quot;])) == &quot;Saturday&quot; | weekdays(as.Date(complete[i, 
+        &quot;date&quot;])) == &quot;Sunday&quot;) {
+        dayType &lt;- append(dayType, &quot;weekend&quot;)
+    } else {
+        dayType &lt;- append(dayType, &quot;weekday&quot;)
+    }
+}
+
+completeWeekType &lt;- cbind(complete, dayType)
+
+par(mfrow = c(2, 1))
+wday &lt;- subset(completeWeekType, completeWeekType$dayType == &quot;weekday&quot;)
+wend &lt;- subset(completeWeekType, completeWeekType$dayType == &quot;weekend&quot;)
+wdayInt &lt;- split(wday, wday$interval)
+v &lt;- c()
+
+for (i in 1:length(unique(wdayInt$interval))) {
+    v &lt;- append(v, sum(wdayInt[[i]][&quot;steps&quot;])/(length(allDays)))
+}
+</code></pre>
+
+<pre><code>## Error: attempt to select less than one element
+</code></pre>
+
+<pre><code class="r">
+plot(unique(wdayInt$interval), v, type = &quot;l&quot;, xlab = &quot;Interval&quot;, ylab = &quot;Average Steps&quot;, 
+    main = &quot;Average Steps by Interval&quot;)
+</code></pre>
+
+<pre><code>## Error: &#39;x&#39; and &#39;y&#39; lengths differ
+</code></pre>
+
+<pre><code class="r">
+wendInt &lt;- split(wend, wend$interval)
+v &lt;- c()
+
+for (i in 1:length(unique(wendInt$interval))) {
+    v &lt;- append(v, sum(wendInt[[i]][&quot;steps&quot;])/(length(allDays)))
+}
+</code></pre>
+
+<pre><code>## Error: attempt to select less than one element
+</code></pre>
+
+<pre><code class="r">
+plot(unique(wendInt$interval), v, type = &quot;l&quot;, xlab = &quot;Interval&quot;, ylab = &quot;Average Steps&quot;, 
+    main = &quot;Average Steps by Interval&quot;)
+</code></pre>
+
+<pre><code>## Error: &#39;x&#39; and &#39;y&#39; lengths differ
+</code></pre>
+
 </body>
 
 </html>
